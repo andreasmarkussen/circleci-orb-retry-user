@@ -4,9 +4,10 @@ version: 2.1
 orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
+  run-with-retry: kimh/run-with-retry@1.0.0
   # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@dev:alpha
+  # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
   run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
-  
 
 jobs:
   build:
@@ -36,8 +37,12 @@ jobs:
             mkdir -p ~/blocking-folder 
             echo JunkFile > ~/blocking-folder/data.txt
             ls -la ~/blocking-folder
-      - run-with-retry-and-clean:
-          name: Run commands
+      - run-with-retry/run-with-retry:
+          # name: Run 'with retry'
+          command: |
+            echo "From Run with Retry"
+      - run-with-retry-and-clean/run-with-retry-and-clean:
+          # name: Run 'with retry and clean '
           command: |
             echo "I will exit fail status"
             bash my-test.sh
