@@ -9,10 +9,14 @@ orbs:
   # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
   run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
 
+docker_image_default:
+    docker:
+  #      - image: circleci
+      -image: alpine
+
 jobs:
   build:
-    docker:
-      - image: alpine:3.7
+    <<: *docker_image_default
     steps:
       - checkout
       - run:
@@ -27,8 +31,7 @@ jobs:
             echo '^^^That should look familiar^^^'
 
   test:
-    docker:
-      - image: alpine:3.7    
+    <<: *docker_image_default
     steps:
       - checkout
       - run:
