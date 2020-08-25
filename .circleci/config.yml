@@ -34,8 +34,10 @@ jobs:
       - run:
           name: Create folder that will block things
           command: |
+            echo "Running step 'with-with-retry' "
             mkdir -p ~/blocking-folder 
             echo JunkFile > ~/blocking-folder/data.txt
+            sh ./no-file.sh
             ls -la ~/blocking-folder
       - run-with-retry/run-with-retry:
           # name: Run 'with retry'
@@ -48,6 +50,7 @@ jobs:
             sh ./my-test.sh
             exit 1
           clean-command: |
+            echo "running clean command"
             rm -f blocking-files
 
 # Orchestrate or schedule a set of jobs
