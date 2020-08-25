@@ -45,7 +45,7 @@ jobs:
       - run-with-retry/run-with-retry:
           # name: Run 'with retry'
           command: 
-            echo "From Run with Retry" && exit 1
+            echo "From Run with Retry" && sh .nofile.sh
       - run-with-retry-and-clean/run-with-retry-and-clean:
           # name: Run 'with retry and clean '
           command: |
