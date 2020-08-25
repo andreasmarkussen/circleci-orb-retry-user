@@ -9,10 +9,11 @@ orbs:
   # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
   run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
 
-docker_image_default:
+# See https://circleci.com/docs/2.0/executor-types/
+docker_image_default: &docker_image_default
     docker:
   #      - image: circleci
-      -image: alpine
+      - image: alpine
 
 jobs:
   build:
