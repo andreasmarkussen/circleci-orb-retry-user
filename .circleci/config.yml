@@ -3,7 +3,8 @@ version: 2.1
 # Use a package of configuration called an orb.
 orbs:
   run-with-retry: kimh/run-with-retry@1.0.0
-  run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@dev:alpha
+  # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@dev:alpha
+  run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
