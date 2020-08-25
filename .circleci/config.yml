@@ -45,7 +45,7 @@ jobs:
           # name: Run 'with retry and clean '
           command: |
             echo "I will exit fail status"
-            bash ./my-test.sh
+            sh ./my-test.sh
             exit 1
           clean-command: |
             rm -f blocking-files
