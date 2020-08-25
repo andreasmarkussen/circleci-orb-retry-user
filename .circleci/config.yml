@@ -34,15 +34,15 @@ jobs:
       - run:
           name: Create folder that will block things
           command: |
-            echo "Running step 'with-with-retry' "
+            echo "Creating the things needed to fail.. "
             mkdir -p ~/blocking-folder 
             echo JunkFile > ~/blocking-folder/data.txt
-            sh ./no-file.sh
             ls -la ~/blocking-folder
       - run-with-retry/run-with-retry:
           # name: Run 'with retry'
           command: |
             echo "From Run with Retry"
+            sh ./no-file.sh
       - run-with-retry-and-clean/run-with-retry-and-clean:
           # name: Run 'with retry and clean '
           command: |
