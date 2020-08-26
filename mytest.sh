@@ -1,4 +1,4 @@
-#!/bin/bin
+#!/bin/bash
 
 This is an example of a simple flaky test. 
 It could be more advanced but it is not. :)
