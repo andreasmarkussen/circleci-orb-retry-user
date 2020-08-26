@@ -56,8 +56,7 @@ jobs:
             echo "Setting pipefail"
             set +eo pipefail
             echo "I will exit fail status"
-            ls -la
-            cd ~
+            cwd
             ls -la
             sh ./my-test.sh
             exit 1
