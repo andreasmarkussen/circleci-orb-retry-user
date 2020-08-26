@@ -16,6 +16,81 @@ docker_image_default: &docker_image_default
   #      - image: circleci
       - image: cimg/base:2020.01
 
+commands:      
+  run-with-retry:
+    description: |
+        Run command with retry. Copied from orb: kimh/run-with-retry # What will this command do? # Descriptions should be short, simple, and clear.
+    parameters:
+        command:
+            description: Command to run
+            type: string
+        retry-count:
+            default: 3
+            description: Number of retry
+            type: integer
+        sleep:
+            default: 5
+            description: Wait duration until next retry
+            type: integer
+    steps:
+        - run: |
+            retry() {
+                MAX_RETRY=<< parameters.retry-count >>
+                n=0
+                until [ $n -ge $MAX_RETRY ]
+                do
+                  "$@" && break
+                  n=$[$n+1]
+                  sleep << parameters.sleep >>
+                done
+                if [ $n -ge $MAX_RETRY ]; then
+                  echo "failed: ${@}" >&2
+                  exit 1
+                fi
+            }
+            retry << parameters.command >>
+
+  run-with-retry-and-clean:
+    description: |
+        Run command with retry. Copied from orb: kimh/run-with-retry # What will this command do? # Descriptions should be short, simple, and clear.
+    parameters:
+        command:
+            description: Command to run
+            type: string
+        retry-count:
+            default: 3
+            description: Number of retry
+            type: integer
+        sleep:
+            default: 5
+            description: Wait duration until next retry
+            type: integer
+        clean-command:
+            description: Command to run
+            type: string
+    steps:
+        - run: |
+            retry() {
+                set +eo pipefail
+                MAX_RETRY=<< parameters.retry-count >>
+                CLEAN_UP=<< parameters.clean-command >>
+                cmd="$@"
+                echo "Function to call $cmd() "
+                for ((n=1;n<=MAX_RETRY;n++)); do
+                  echo "Attempt $n of $MAX_RETRY "
+                  "$cmd"&&break
+                  echo "Sleeping"
+                  sleep 1
+                  echo "Clean-up action '$CLEAN_UP' "
+                  "$CLEAN_UP"
+                done
+                if [ $n -ge $MAX_RETRY ]; then
+                  echo "failed: ${@}" >&2
+                  exit 1
+                fi
+            }
+            retry << parameters.command >>
+
 jobs:
   build:
     <<: *docker_image_default
@@ -45,14 +120,16 @@ jobs:
             ls -la ~/blocking-folder
             echo '#!/bin/sh' > run.sh
             echo 'echo Hello world!' >> run.sh
+            echo 'find . | grep older'
             echo 'ls theFolder' >> run.sh
             echo 'mkdir -p theFolder'  >> run.sh
-      - run-with-retry/run-with-retry:
+      - run-with-retry-and-clean:
           # name: Run 'with retry'
           command: |
             set +eo pipefail
-            run.sh
-      - run-with-retry-and-clean/run-with-retry-and-clean:
+            bash +eo pipefail run.sh
+          clean-command: echo "cleaning" 
+      - run-with-retry-and-clean:
           # name: Run 'with retry and clean '
           command: |
             echo "Setting pipefail"
