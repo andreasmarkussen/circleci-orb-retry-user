@@ -2,32 +2,12 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  run-with-retry: kimh/run-with-retry@1.0.0
-  # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@dev:alpha
-  run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
+  # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
-
-jobs:
-  test:
-    run:
-      name: Create folder that will block things
-      command: |
-        mkdir -p ~/blocking-folder 
-        echo JunkFile > ~/blocking-folder/data.txt
-        ls -la ~/blocking-folder
-    run-with-retry-and-clean:
-      name: Run commands
-      command: |
-        echo "I will exit fail status"
-        bash my-test.sh
-        exit 1
-      clean-command: |
-        rm -f blocking-files
-
+# Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
-      - test 
