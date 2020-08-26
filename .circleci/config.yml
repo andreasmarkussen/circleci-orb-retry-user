@@ -42,15 +42,19 @@ jobs:
             mkdir -p ~/blocking-folder 
             echo JunkFile > ~/blocking-folder/data.txt
             ls -la ~/blocking-folder
+            failFirstTime(){
+              ls theFolder
+              mkdir -p theFolder
+            }
       - run-with-retry/run-with-retry:
           # name: Run 'with retry'
-          command: 
-            echo "From Run with Retry" && sh .nofile.sh
+          command: |
+            failFirstTime
       - run-with-retry-and-clean/run-with-retry-and-clean:
           # name: Run 'with retry and clean '
           command: |
             echo "Setting pipefail"
-            set +oe pipefail
+            set +eo pipefail
             echo "I will exit fail status"
             ls -la
             cd ~
