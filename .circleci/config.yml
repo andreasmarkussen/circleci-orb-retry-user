@@ -58,7 +58,7 @@ jobs:
             echo "I will exit fail status"
             cwd
             ls -la
-            sh ./my-test.sh
+            sh ./mytest.sh
             exit 1
           clean-command: |
             echo "running clean command"
