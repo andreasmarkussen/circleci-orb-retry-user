@@ -8,7 +8,7 @@ orbs:
   #run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.0.1
   # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
   # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
-  run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.0.2
+  run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@dev:alpha2
 
 # See https://circleci.com/docs/2.0/executor-types/
 docker_image_default: &docker_image_default
