@@ -50,12 +50,13 @@ jobs:
       - run-with-retry/run-with-retry:
           # name: Run 'with retry'
           command: |
-            sh run.sh
+            set +eo pipefail
+            run.sh
       - run-with-retry-and-clean/run-with-retry-and-clean:
           # name: Run 'with retry and clean '
           command: |
             echo "Setting pipefail"
-       #     set +eo pipefail
+            set +eo pipefail
             echo "I will exit fail status"
             ls -la
             sh ./mytest.sh
