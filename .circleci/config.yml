@@ -44,8 +44,8 @@ jobs:
             ls -la ~/blocking-folder
             echo '#!/bin/sh' > run.sh
             echo 'echo Hello world!' >> run.sh
-            ls theFolder >> run.sh
-            mkdir -p theFolder  >> run.sh
+            echo 'ls theFolder' >> run.sh
+            echo 'mkdir -p theFolder'  >> run.sh
       - run-with-retry/run-with-retry:
           # name: Run 'with retry'
           command: |
