@@ -13,7 +13,7 @@ orbs:
 docker_image_default: &docker_image_default
     docker:
   #      - image: circleci
-      - image: alpine
+      - image: cimg/base:2020.01
 
 jobs:
   build:
@@ -49,6 +49,8 @@ jobs:
       - run-with-retry-and-clean/run-with-retry-and-clean:
           # name: Run 'with retry and clean '
           command: |
+            echo "Setting pipefail"
+            set +oe pipefail
             echo "I will exit fail status"
             ls -la
             cd ~
