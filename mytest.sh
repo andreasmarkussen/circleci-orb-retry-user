@@ -1,7 +1,7 @@
 #!/bin/bash
 
-This is an example of a simple flaky test. 
-It could be more advanced but it is not. :)
+echo "This is an example of a simple flaky test." 
+echo " It could be more advanced but it is not. :)"
 
 FILE=~/blocking-folder/data.txt
 if test -f "$FILE"; then
