@@ -5,9 +5,10 @@ orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
   run-with-retry: kimh/run-with-retry@1.0.0
-  run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.0.1
+  #run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.0.1
   # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
   # run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.1.0
+  run-with-retry-and-clean: andreasmarkussen/run-with-retry-and-clean@0.0.2
 
 # See https://circleci.com/docs/2.0/executor-types/
 docker_image_default: &docker_image_default
