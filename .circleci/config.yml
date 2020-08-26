@@ -55,7 +55,7 @@ jobs:
           # name: Run 'with retry and clean '
           command: |
             echo "Setting pipefail"
-            set +eo pipefail
+       #     set +eo pipefail
             echo "I will exit fail status"
             ls -la
             sh ./mytest.sh
